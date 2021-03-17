@@ -35,12 +35,21 @@ export default {
         ...mapGetters("todo", ["todos"])
     },
     methods: {
-        ...mapMutations("todo", ["deleteTodo", "editTodo"]),
+        ...mapMutations("todo", ["deleteTodo"]),
+        editTodo(id){
+            const todo = this.$store.getters["todo/todos"][id]
+            this.title = todo.title
+            this.dueDate = todo.dueDate
+            this.$store.commit("todo/editTodo", id)
+        },
         updateTodo(id){
             if(this.title === '' | this.dueDate === '') return;
             let todo = this.$store.getters["todo/todos"][id]
             todo.title = this.title
-            todo.dueDate = formatDate(this.dueDate, 'yyyy-MM-dd')
+            console.log(typeof(this.dueDate))
+            todo.dueDate = typeof(this.dueDate) === 'string' ? 
+                this.dueDate :
+                formatDate(this.dueDate, 'yyyy-MM-dd')
             todo.editMode = false
             this.$store.commit("todo/updateTodo", {id, todo})
         }
