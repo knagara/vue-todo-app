@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 #todo-app {
-    width: 400px;
+    width: 700px;
     margin: 2rem auto;
     text-align: center;
 }

@@ -1,4 +1,4 @@
-import {statusNotYet} from '@/const'
+import {statusNotYet} from '@/common/const'
 
 const state = {
     todos: [{
