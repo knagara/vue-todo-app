@@ -16,8 +16,7 @@ export default {
         addTodo(){
             const todo = {
                 title: this.title,
-                dueDate: 'xxx',
-                status: 'xxx'
+                dueDate: 'xxx'
             }
             this.$store.commit("todo/addTodo", todo)
         }

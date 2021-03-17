@@ -1,9 +1,13 @@
+const statusNotYet = '未着手'
+// const statusGoing = '進行中'
+// const statusDone = '完了'
+
 const state = {
     todos: [{
         id: 0,
         title: 'テスト',
         dueDate: '2012-04-01',
-        status: '未着手'
+        status: statusNotYet
     }],
     id: 0
 };
@@ -16,6 +20,7 @@ const mutations = {
     addTodo(state, todo) {
         state.id++;
         todo['id'] = state.id
+        todo['status'] = statusNotYet
         state.todos.push(todo)
     },
     deleteTodo(state, id){
