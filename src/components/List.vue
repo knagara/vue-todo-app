@@ -1,7 +1,13 @@
 <template>
     <div>
+        <div>
+            <button @click="filterAll">すべて表示</button>
+            <button @click="filterNotYet">未着手のみ表示</button>
+            <button @click="filterGoing">進行中のみ表示</button>
+            <button @click="filterDone">完了のみ表示</button>
+        </div>
         <ul>
-            <li v-for="todo in todos" :key="todo.id">
+            <li v-for="todo in filteredTodos" :key="todo.id">
                 <div v-if="!todo.editMode">
                     {{todo.id}}, {{todo.title}}, {{todo.dueDate}}, {{todo.status}}
                     <button @click="editTodo(todo.id)">編集</button>
@@ -33,17 +39,35 @@ export default {
             title: '',
             dueDate: '',
             status: '',
-            statusList: [statusNotYet, statusGoing, statusDone]
+            statusList: [statusNotYet, statusGoing, statusDone],
+            filterStatus: ''
         }
     },
     components:{
         Datepicker
     },
     computed: {
-        ...mapGetters("todo", ["todos"])
+        ...mapGetters("todo", ["todos"]),
+        filteredTodos(){
+            let todos = this.$store.getters["todo/todos"]
+            if(this.filterStatus === '') return todos
+            return todos.filter(todo => todo.status === this.filterStatus)
+        }
     },
     methods: {
         ...mapMutations("todo", ["deleteTodo"]),
+        filterAll(){
+            this.filterStatus = ''
+        },
+        filterNotYet(){
+            this.filterStatus = statusNotYet
+        },
+        filterGoing(){
+            this.filterStatus = statusGoing
+        },
+        filterDone(){
+            this.filterStatus = statusDone
+        },
         editTodo(id){
             const todo = this.$store.getters["todo/todos"].find(todo => todo.id === id)
             this.title = todo.title
