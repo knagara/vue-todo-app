@@ -35,6 +35,16 @@ const mutations = {
         todo.dueDate = idAndTodo.todo.dueDate
         todo.status = idAndTodo.todo.status
         todo.editMode = false
+    },
+    sortById(state){
+        state.todos.sort((a, b) => {
+            return a.id < b.id ? -1 : 1
+        })
+    },
+    sortByDate(state){
+        state.todos.sort((a, b) => {
+            return a.dueDate > b.dueDate ? -1 : 1
+        })
     }
 }
 
