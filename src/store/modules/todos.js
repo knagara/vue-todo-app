@@ -14,6 +14,9 @@ const getters = {
 const mutations = {
     add(state, todo) {
         state.todos.push(todo)
+    },
+    deleteTodo(state, id){
+        state.todos = state.todos.filter(todo => todo.id !== id)
     }
 }
 
