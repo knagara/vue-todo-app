@@ -12,7 +12,7 @@ const getters = {
 };
 
 const mutations = {
-    add(state, todo) {
+    addTodo(state, todo) {
         state.todos.push(todo)
     },
     deleteTodo(state, id){

@@ -13,10 +13,10 @@
 import { mapGetters, mapMutations } from 'vuex';
 export default {
     computed: {
-        ...mapGetters("todos", ["todos"])
+        ...mapGetters("todo", ["todos"])
     },
     methods: {
-        ...mapMutations("todos", ["deleteTodo"])
+        ...mapMutations("todo", ["deleteTodo"])
     }
 }
 </script>

@@ -19,7 +19,7 @@ export default {
                 dueDate: 'xxx',
                 status: 'xxx'
             }
-            this.$store.commit("todos/add", todo)
+            this.$store.commit("todo/addTodo", todo)
         }
     }
 }
