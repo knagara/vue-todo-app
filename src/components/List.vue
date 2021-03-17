@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul>
-            <li v-for="todo in todos" :key="todo">
+            <li v-for="todo in todos" :key="todo.id">
                 {{todo.title}}, {{todo.dueDate}}, {{todo.status}}
             </li>
         </ul>
