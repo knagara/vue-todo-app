@@ -2,7 +2,7 @@
     <div>
         <ul>
             <li v-for="todo in todos" :key="todo.id">
-                <div v-if="!todos[todo.id].editMode">
+                <div v-if="!todo.editMode">
                     {{todo.id}}, {{todo.title}}, {{todo.dueDate}}, {{todo.status}}
                     <button @click="editTodo(todo.id)">編集</button>
                     <button @click="deleteTodo(todo.id)">削除</button>
@@ -10,6 +10,10 @@
                 <div v-else>
                     タイトル：<input type="text" v-model="title">
                     期限：<datepicker v-model="dueDate" :format="'yyyy-MM-dd'"></datepicker>
+                    ステータス：
+                        <select v-model="status">
+                            <option v-for="status in statusList" :key="status">{{status}}</option>
+                        </select>
                     <button @click="updateTodo(todo.id)">保存</button>
                 </div>
             </li>
@@ -21,11 +25,15 @@
 import { mapGetters, mapMutations } from 'vuex';
 import Datepicker from 'vuejs-datepicker';
 import formatDate from '@/common/dateFormatter'
+import {statusNotYet, statusGoing, statusDone} from '@/common/const'
+
 export default {
     data() {
         return {
             title: '',
-            dueDate: ''
+            dueDate: '',
+            status: '',
+            statusList: [statusNotYet, statusGoing, statusDone]
         }
     },
     components:{
@@ -37,20 +45,20 @@ export default {
     methods: {
         ...mapMutations("todo", ["deleteTodo"]),
         editTodo(id){
-            const todo = this.$store.getters["todo/todos"][id]
+            const todo = this.$store.getters["todo/todos"].find(todo => todo.id === id)
             this.title = todo.title
             this.dueDate = todo.dueDate
+            this.status = todo.status
             this.$store.commit("todo/editTodo", id)
         },
         updateTodo(id){
             if(this.title === '' | this.dueDate === '') return;
-            let todo = this.$store.getters["todo/todos"][id]
+            let todo = this.$store.getters["todo/todos"].find(todo => todo.id === id)
             todo.title = this.title
-            console.log(typeof(this.dueDate))
             todo.dueDate = typeof(this.dueDate) === 'string' ? 
                 this.dueDate :
                 formatDate(this.dueDate, 'yyyy-MM-dd')
-            todo.editMode = false
+            todo.status = this.status
             this.$store.commit("todo/updateTodo", {id, todo})
         }
     }

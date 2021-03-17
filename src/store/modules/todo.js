@@ -18,19 +18,23 @@ const getters = {
 const mutations = {
     addTodo(state, todo) {
         state.id++;
-        todo['id'] = state.id
-        todo['status'] = statusNotYet
-        todo['editMode'] = false
+        todo.id = state.id
+        todo.status = statusNotYet
+        todo.editMode = false
         state.todos.push(todo)
     },
     deleteTodo(state, id){
         state.todos = state.todos.filter(todo => todo.id !== id)
     },
     editTodo(state, id){
-        state.todos[id].editMode = true
+        state.todos.find(todo => todo.id === id).editMode = true
     },
     updateTodo(state, idAndTodo){
-        state.todos[idAndTodo.id] = idAndTodo.todo
+        let todo = state.todos.find(todo => todo.id === idAndTodo.id)
+        todo.title = idAndTodo.todo.title
+        todo.dueDate = idAndTodo.todo.dueDate
+        todo.status = idAndTodo.todo.status
+        todo.editMode = false
     }
 }
 
