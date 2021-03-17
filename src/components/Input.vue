@@ -14,6 +14,7 @@ export default {
     },
     methods: {
         addTodo(){
+            if(this.title === '') return;
             const todo = {
                 title: this.title,
                 dueDate: 'xxx'
