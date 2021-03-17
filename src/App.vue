@@ -1,9 +1,13 @@
 <template>
-  <div></div>
+  <TodoApp></TodoApp>
 </template>
 
 <script>
-</script>
+import TodoApp from './components/TodoApp'
 
-<style>
-</style>
+export default {
+  components: {
+    TodoApp
+  }
+}
+</script>
