@@ -1,7 +1,7 @@
 <template>
     <div>
-        <button @click="sortById">IDでソート</button>
-        <button @click="sortByDate">期限でソート</button>
+        <v-btn class="mr-4" @click="sortById">IDでソート</v-btn>
+        <v-btn @click="sortByDate">期限でソート</v-btn>
     </div>
 </template>
 
