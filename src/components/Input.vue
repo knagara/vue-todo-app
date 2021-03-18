@@ -1,8 +1,20 @@
 <template>
     <div>
-        タイトル：<input type="text" v-model="title">
-        期限：<datepicker v-model="dueDate" :format="'yyyy-MM-dd'"></datepicker>
-        <button @click="addTodo">追加</button>
+        <v-form>
+            <v-container>
+                <v-row justify="center">
+                    <v-col cols="12" sm="6">
+                        <v-text-field label="タイトル" solo dense v-model="title"></v-text-field>
+                    </v-col>
+                        <v-col cols="12" sm="2">
+                        <datepicker placeholder="期限" v-model="dueDate" :format="'yyyy-MM-dd'"></datepicker>          
+                        </v-col>  
+                    <v-col cols="12" sm="2">
+                    <v-btn @click="addTodo">追加</v-btn>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </v-form>
     </div>
 </template>
 
@@ -35,5 +47,6 @@ export default {
 <style scoped>
 .vdp-datepicker {
     display: inline-block;
+    border: 1px solid #ccc;
 }
 </style>
