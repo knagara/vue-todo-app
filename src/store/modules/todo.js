@@ -2,13 +2,25 @@ import {statusNotYet} from '@/common/const'
 
 const state = {
     todos: [{
-        id: 0,
-        title: 'テスト',
-        dueDate: '2012-04-01',
+        id: 1,
+        title: 'テスト1',
+        dueDate: '2021-06-01',
+        status: statusNotYet,
+        editMode: false
+    },{
+        id: 2,
+        title: 'テスト2',
+        dueDate: '2021-05-01',
+        status: statusNotYet,
+        editMode: false
+    },{
+        id: 3,
+        title: 'テスト3',
+        dueDate: '2021-04-01',
         status: statusNotYet,
         editMode: false
     }],
-    id: 0
+    id: 3
 };
 
 const getters = {
@@ -43,7 +55,7 @@ const mutations = {
     },
     sortByDate(state){
         state.todos.sort((a, b) => {
-            return a.dueDate > b.dueDate ? -1 : 1
+            return a.dueDate < b.dueDate ? -1 : 1
         })
     }
 }

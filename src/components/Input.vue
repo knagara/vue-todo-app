@@ -4,7 +4,7 @@
       <v-container class="cyan lighten-5 mb-5">
         <v-row>
           <v-col align="center">
-            <h3>新規追加</h3>
+            <h3 class="cyan--text text--darken-3">新規追加</h3>
           </v-col>
         </v-row>
         <v-row justify="center">
@@ -62,5 +62,6 @@ export default {
 .vdp-datepicker {
   display: inline-block;
   border: 1px solid #ccc;
+  background-color: #fff;
 }
 </style>
