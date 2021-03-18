@@ -6,7 +6,63 @@
       <v-btn class="mr-5" @click="filterGoing">進行中のみ表示</v-btn>
       <v-btn @click="filterDone">完了のみ表示</v-btn>
     </div>
-    <ul>
+    <v-simple-table>
+      <template v-slot:default>
+        <tbody>
+          <tr v-for="todo in filteredTodos" :key="todo.id">
+            <template v-if="!todo.editMode">
+              <td>{{ todo.id }}</td>
+              <td>{{ todo.title }}</td>
+              <td>{{ todo.dueDate }}</td>
+              <td>{{ todo.status }}</td>
+              <td>
+                <v-btn @click="editTodo(todo.id)">編集</v-btn
+                ><v-btn @click="deleteTodo(todo.id)">削除</v-btn>
+              </td>
+            </template>
+            <template v-else>
+              <td>
+                <v-form>
+                  <v-container>
+                    <v-row justify="center">
+                      <v-col cols="12" sm="5">
+                        <v-text-field
+                          label="タイトル"
+                          solo
+                          dense
+                          type="text"
+                          v-model="title"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="3">
+                        <datepicker
+                          placeholder="期限"
+                          v-model="dueDate"
+                          :format="'yyyy-MM-dd'"
+                        ></datepicker>
+                      </v-col>
+                      <v-col cols="12" sm="2">
+                        <v-select
+                          solo
+                          dense
+                          :items="statusList"
+                          v-model="status"
+                        >
+                        </v-select>
+                      </v-col>
+                      <v-col cols="12" sm="2">
+                        <v-btn @click="updateTodo(todo.id)">保存</v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-form>
+              </td>
+            </template>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
+    <!-- <ul>
       <li v-for="todo in filteredTodos" :key="todo.id">
         <div v-if="!todo.editMode">
           {{ todo.id }}, {{ todo.title }}, {{ todo.dueDate }}, {{ todo.status }}
@@ -45,7 +101,7 @@
           </v-form>
         </div>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
