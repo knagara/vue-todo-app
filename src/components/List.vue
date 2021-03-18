@@ -6,68 +6,30 @@
       <v-btn class="mr-5" @click="filterGoing">進行中のみ表示</v-btn>
       <v-btn @click="filterDone">完了のみ表示</v-btn>
     </div>
-    <v-simple-table>
-      <template v-slot:default>
-        <tbody>
-          <tr v-for="todo in filteredTodos" :key="todo.id">
-            <template v-if="!todo.editMode">
-              <td>{{ todo.id }}</td>
-              <td>{{ todo.title }}</td>
-              <td>{{ todo.dueDate }}</td>
-              <td>{{ todo.status }}</td>
-              <td>
-                <v-btn @click="editTodo(todo.id)">編集</v-btn
-                ><v-btn @click="deleteTodo(todo.id)">削除</v-btn>
-              </td>
-            </template>
-            <template v-else>
-              <td>
-                <v-form>
-                  <v-container>
-                    <v-row justify="center">
-                      <v-col cols="12" sm="5">
-                        <v-text-field
-                          label="タイトル"
-                          solo
-                          dense
-                          type="text"
-                          v-model="title"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="3">
-                        <datepicker
-                          placeholder="期限"
-                          v-model="dueDate"
-                          :format="'yyyy-MM-dd'"
-                        ></datepicker>
-                      </v-col>
-                      <v-col cols="12" sm="2">
-                        <v-select
-                          solo
-                          dense
-                          :items="statusList"
-                          v-model="status"
-                        >
-                        </v-select>
-                      </v-col>
-                      <v-col cols="12" sm="2">
-                        <v-btn @click="updateTodo(todo.id)">保存</v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-form>
-              </td>
-            </template>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
-    <!-- <ul>
+    <v-container class="grey lighten-3">
+      <v-row>
+        <v-col cols="12" sm="1">ID</v-col>
+        <v-col cols="12" sm="4" align="left">タイトル</v-col>
+        <v-col cols="12" sm="2">期限</v-col>
+        <v-col cols="12" sm="2">ステータス</v-col>
+        <v-col cols="12" sm="3"></v-col>
+      </v-row>
+    </v-container>
+    <ul class="pl-0">
       <li v-for="todo in filteredTodos" :key="todo.id">
         <div v-if="!todo.editMode">
-          {{ todo.id }}, {{ todo.title }}, {{ todo.dueDate }}, {{ todo.status }}
-          <v-btn @click="editTodo(todo.id)">編集</v-btn>
-          <v-btn @click="deleteTodo(todo.id)">削除</v-btn>
+          <v-container>
+            <v-row>
+              <v-col cols="12" sm="1">{{ todo.id }}</v-col>
+              <v-col cols="12" sm="4" align="left">{{ todo.title }} </v-col>
+              <v-col cols="12" sm="2">{{ todo.dueDate }}</v-col>
+              <v-col cols="12" sm="2">{{ todo.status }}</v-col>
+              <v-col cols="12" sm="3">
+                <v-btn class="mr-2" @click="editTodo(todo.id)">編集</v-btn>
+                <v-btn @click="deleteTodo(todo.id)">削除</v-btn>
+              </v-col>
+            </v-row>
+          </v-container>
         </div>
         <div v-else>
           <v-form>
@@ -101,7 +63,7 @@
           </v-form>
         </div>
       </li>
-    </ul> -->
+    </ul>
   </div>
 </template>
 
